@@ -1,5 +1,32 @@
+/**
+ * Most important configs:
+ *
+ * - isolatedModules (vite)
+ * - importsNotUsedAsValues (svelte)
+ * - preserveValueImports (svelte)
+ * - sourceMap (svelte)
+ *
+ * @see {@link https://www.npmjs.com/package/@tsconfig/svelte} re: svelte options
+ *
+ * @note svelte/types/runtime/dom.d.ts includes definitions for DOM APIs, making "lib": ["dom"] redundant here
+ */
 {
+  "include": ["web/**/*"],
+  "exclude": ["node_modules/*", "public/*"],
   "compilerOptions": {
-    "isolatedModules": true
+    "types": ["svelte", "vite/client"],
+    "lib": ["dom"],
+    "moduleResolution": "node",
+    "target": "es6",
+    "importsNotUsedAsValues": "error",
+    "preserveValueImports": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "checkJs": true
   }
 }
