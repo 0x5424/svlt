@@ -3,12 +3,14 @@
   "name": "svlt",
   "description": "bootstrap new svelte project with as few required dependencies",
   "scripts": {
-    "start": "vite"
+    "start": "vite",
+    "check": "svelte-check"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "latest",
     "esbuild": "*",
     "svelte": "latest",
+    "svelte-check": "latest",
     "svelte-preprocess": "latest",
     "vite": "latest"
   }
