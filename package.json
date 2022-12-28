@@ -1,0 +1,10 @@
+{
+  "name": "svlt",
+  "description": "bootstrap new svelte project with as few required dependencies",
+  "scripts": {
+    "start": "vite"
+  },
+  "devDependencies": {
+    "vite": "latest"
+  }
+}
