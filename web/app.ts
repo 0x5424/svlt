@@ -1,9 +1,11 @@
-let foo: string | number = 'vite up'
+import './app.css'
+import App from './App.svelte'
 
+let foo: string | number = 'vite up'
 console.log(foo)
 
 foo = 69
 
 console.log(foo)
 
-export default foo
+new App({ target: document.body, props: { name: 'world' } })
