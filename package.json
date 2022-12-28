@@ -7,7 +7,9 @@
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "latest",
+    "esbuild": "*",
     "svelte": "latest",
+    "svelte-preprocess": "latest",
     "vite": "latest"
   }
 }
