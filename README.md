@@ -20,6 +20,42 @@ Here are a few items (non-exhaustive) you should change according to your projec
 - `name` and `description` in package.json
 - `title` in index.html
 
+## Recipes
+
+After forking the project, here are a few common setups you can integrate in your project:
+
+### Adding `eslint`
+
+Install eslint and plugins for typescript+svelte:
+```bash
+npm i --save-dev eslint eslint-plugin-svelte3 @typescript-eslint/eslint-plugin @typescript-eslint/parser
+```
+
+Add the minimum required config:
+```bash
+echo 'env: { browser: true }
+extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"]
+parser: "@typescript-eslint/parser"
+parserOptions: { extraFileExtensions: [svelte] }
+settings: {svelte3/typescript: true}' > .eslintrc.yml
+```
+
+### Using `bun`
+
+Unfortunately, `vite` still requires a node environment to run properly. However, you can leverage bun's native TypeScript support to get IDE intellisense. (Check your IDE's documentation on language servers)
+
+As of 2-2023 it's still an upstream WIP, but if `bun` is available you can write your unit tests in TypeScript **without any additional dependencies!**
+```diff
+package.json
+
+ scripts: {
+   start: "vite"
+   check: "svelte-check"
++  test: "bun wiptest"
+```
+
+The above will check for any files ending in `*.test.ts` to run (default behavior). Bun supports Jest-like matchers, check [their docs](https://github.com/oven-sh/bun/tree/main/test) for more info.
+
 ## Opinionated Parts
 
 List of stuff that's opinionated or otherwise "looks weird" 😄
