@@ -11,7 +11,7 @@
  * @note svelte/types/runtime/dom.d.ts includes definitions for DOM APIs, making "lib": ["dom"] redundant here
  */
 {
-  "include": ["web/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules/*", "public/*"],
   "compilerOptions": {
     "types": ["svelte", "vite/client"],
