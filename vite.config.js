@@ -6,7 +6,14 @@ import { transformSync } from 'esbuild'
 // Use built-in ts loader from esbuild (no direct TS dependency!)
 const svelteConfig = {
   preprocess: sveltePreprocess({
-    typescript: ({ content }) => transformSync(content, { loader: 'ts' })
+    typescript: ({ content }) => transformSync(content, {
+      loader: 'ts',
+      tsconfigRaw: `{
+        "compilerOptions": {
+          "preserveValueImports": true
+        },
+      }`
+    })
   })
 }
 
