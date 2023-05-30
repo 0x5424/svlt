@@ -27,6 +27,10 @@ Then, here are a few (non-exhaustive) project-specific things to change accordin
 ## Recipes
 
 After forking the project, here are a few common setups you can integrate in your project:
+- [SvelteKit](#adding-sveltekit)
+- [Tailwind](#using-tailwind)
+- [TypeScript ESLint](#adding-eslint)
+- [`bun` support](#using-bun)
 
 ### Adding `SvelteKit`
 
@@ -54,7 +58,7 @@ svelte.config.js
  export default {
    preprocess: [vitePreprocess()],
 +  kit: { adapter: adapter() }
-}
+ }
 ```
 
 The vite config:
@@ -101,6 +105,48 @@ Finally, create an entrypoint by renaming `index.html` to `src/app.html` with th
 +  <body>%sveltekit.body%</body>
 ```
 
+### Adding `tailwind`
+
+Follow [their guide](https://tailwindcss.com/docs/guides/sveltekit)... but for posterity:
+```diff
+package.json
+
+   "devDependencies": {
++    "autoprefixer": "latest",
++    "postcss": "latest",
++    "tailwindcss": "latest",
+```
+
+Add the default tailwind config `tailwind.config.js`:
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./src/**/*.{svelte,ts}'],
+  theme: { extend: {} },
+  /** Optionally, add `"@tailwindcss/forms": "latest"` for improved form support */
+  // plugins: [require('@tailwindcss/forms')]
+  plugins: []
+}
+```
+
+Add the initial `postcss.config.js`:
+```js
+export default {
+  plugins: { tailwindcss: {}, autoprefixer: {} }
+}
+````
+
+Then add the minimum required directives in the main css:
+```diff
+app.css
+
++@tailwind base;
++@tailwind components;
++@tailwind utilities;
++
+ :root {
+```
+
 ### Adding `eslint`
 
 Install eslint and plugins for typescript+svelte:
@@ -121,14 +167,14 @@ settings: {svelte3/typescript: true}' > .eslintrc.yml
 
 Unfortunately, `vite` still requires a node environment to run properly. However, you can leverage bun's native TypeScript support to get IDE intellisense. (Check your IDE's documentation on language servers)
 
-As of 2-2023 it's still an upstream WIP, but if `bun` is available you can write your unit tests in TypeScript **without any additional dependencies!**
+If a `bun` executable is available, you can write your unit tests in TypeScript **without any additional npm dependencies!**
 ```diff
 package.json
 
  scripts: {
    start: "vite"
    check: "svelte-check"
-+  test: "bun wiptest"
++  test: "bun test"
 ```
 
 The above will check for any files ending in `*.test.ts` to run (default behavior). Bun supports Jest-like matchers, [check upstream](https://github.com/oven-sh/bun/tree/main/test) for more info.
